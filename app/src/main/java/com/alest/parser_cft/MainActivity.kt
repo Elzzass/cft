@@ -2,20 +2,17 @@ package com.alest.parser_cft
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Contacts
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.github.kittinunf.fuel.httpGet
-import com.github.kittinunf.result.Result
-import java.lang.StringBuilder
 
 
 class MainActivity : AppCompatActivity() {
 
 //    val URL = "http://jsonplaceholder.typicode.com/users";
     val URL = "https://www.cbr-xml-daily.ru/daily_json.js"
-    var People = ArrayList<Person>()
+    var People = ArrayList<ResponseData>()
     private lateinit var textView: TextView
     var str: String = ""
 
@@ -33,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun request() {
         //при помощи расширения httpGet() выполняем наш запрос и получаем данные в функции responseString
-        URL.httpGet().responseObject(Person.Deserializer()) { request, response, result ->
+        URL.httpGet().responseObject(ResponseData.Deserializer()) { request, response, result ->
             val (dataFromResponse, err) = result
 
             Log.d("Tag", "responseObject result: ${result}")
