@@ -10,4 +10,8 @@ data class Person(
     class Deserializer: ResponseDeserializable<Array<Person>> {
         override fun deserialize(content: String): Array<Person>? = Gson().fromJson(content, Array<Person>::class.java)
     }
+
+    override fun toString(): String {
+        return "name: $name email: $email"
+     }
 }

@@ -2,10 +2,13 @@ package com.alest.parser_cft
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Contacts
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
+import java.lang.StringBuilder
 
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     val URL = "http://jsonplaceholder.typicode.com/users";
     var People = ArrayList<Person>()
     private lateinit var textView: TextView
+    var str: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.okhttp_request).setOnClickListener {
             request()
         }
-
     }
 
     private fun request() {
@@ -36,13 +39,22 @@ class MainActivity : AppCompatActivity() {
         URL.httpGet().responseObject(Person.Deserializer()) { request, response, result ->
             val (people, err) = result
 
+            Log.d("Tag", "responseObject result: ${result}")
+
             //Add to ArrayList
             people?.forEach { person ->
                 People.add(person)
+                Log.d("Tag", "responseObject person: ${person}")
+                str += person.toString()
             }
-
-            println(People)
+            Log.d("Tag", "responseObject People: ${People}")
+//            People.joinToString { it -> Log.d("Tag", "responseObject str: ${it.toString()}"))
+            Log.d("Tag", "responseObject str: ${str}")
+            textView.post { textView.text = str }
         }
+
+
+        println(People)
     }
 
 }
