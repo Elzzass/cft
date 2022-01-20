@@ -10,7 +10,7 @@ val Date: String,
 val PreviousDate: String,
 val PreviousURL: String,
 val Timestamp: String,
-val Valute:MutableMap<String,Object>
+val Valute:MutableMap<String,Valute>
 ){
     class Deserializer: ResponseDeserializable<Person> {
 //        override fun deserialize(content: String): Array<Person>? = Gson().fromJson(content, Array<Person>::class.java)
@@ -18,7 +18,7 @@ val Valute:MutableMap<String,Object>
     }
 
     override fun toString(): String {
-        return "Date: $Date PreviousDate: $PreviousDate valute: ${Valute}"
+        return "Date: $Date PreviousDate: $PreviousDate valute: ${Valute.values.toList()}"
 //        return "name: $name email: $email"
      }
 }
