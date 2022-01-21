@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         //добавляем обработчик для кнопки вызова функции request()
         request()
 
-//        initRecycler()
-
         findViewById<Button>(R.id.okhttp_request).setOnClickListener {
             request()
 
@@ -61,9 +59,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("Tag", "responseObject str: ${str}")
 //            textView.post { textView.text = str }
             textView.post { textView.text = dataFromResponse.toString() }
+            initRecycler()
 
         }
-        initRecycler()
     }
 
 }
