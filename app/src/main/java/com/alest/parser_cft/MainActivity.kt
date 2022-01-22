@@ -80,11 +80,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecycler() {
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+//        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 //        adapter = ValutaRecyclerAdapter(this, databaseHelper?.getAllFromDB()!!) //Создаем экземпляр класса CarsRecyclerAdapter
+        valuteList.clear()
         valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
-        recyclerView.adapter = adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
+//        recyclerView.adapter = adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
+        findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
         adapter.notifyDataSetChanged()
         Log.d("Tag", "initRecycler databaseHelper?.getAllFromDB()!!: ${databaseHelper?.getAllFromDB()!!}")
         Log.d("Tag", "initRecycler adapter: ${adapter}")
@@ -117,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 //            adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
 //            adapter.notifyDataSetChanged()
             Log.d("Tag", "responseObject valuteList: ${valuteList}")
-            Log.d("Tag", "responseObject databaseHelper?.getAllFromDB(): ${databaseHelper?.getAllFromDB()!!}")
+//            Log.d("Tag", "responseObject databaseHelper?.getAllFromDB(): ${databaseHelper?.getAllFromDB()!!}")
             Log.d("Tag", "responseObject err: ${err}")
             Log.d("Tag", "responseObject dataFromResponse: ${dataFromResponse}")
             Log.d("Tag", "responseObject People: ${People}")
