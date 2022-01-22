@@ -82,10 +82,13 @@ class MainActivity : AppCompatActivity() {
     private fun initRecycler() {
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 //        adapter = ValutaRecyclerAdapter(this, databaseHelper?.getAllFromDB()!!) //Создаем экземпляр класса CarsRecyclerAdapter
+        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
         recyclerView.adapter = adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
         adapter.notifyDataSetChanged()
+        Log.d("Tag", "initRecycler databaseHelper?.getAllFromDB()!!: ${databaseHelper?.getAllFromDB()!!}")
         Log.d("Tag", "initRecycler adapter: ${adapter}")
+        Log.d("Tag", "initRecycler valuteList: ${valuteList}")
 
     }
 
@@ -104,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             valuteList.clear()
             dataFromResponse?.Valute?.values?.forEach { valute ->
 //                valuteArray.add(valute)
-                Log.d("Tag", "responseObject valute: ${valute}")
+                Log.d("Tag", "request valute: ${valute}")
 
                 databaseHelper?.addValuta(valute)
 //                notifyRV()
@@ -114,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 //            adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
 //            adapter.notifyDataSetChanged()
             Log.d("Tag", "responseObject valuteList: ${valuteList}")
-            Log.d("Tag", "responseObject valuteArray: ${valuteList}")
+            Log.d("Tag", "responseObject databaseHelper?.getAllFromDB(): ${databaseHelper?.getAllFromDB()!!}")
             Log.d("Tag", "responseObject err: ${err}")
             Log.d("Tag", "responseObject dataFromResponse: ${dataFromResponse}")
             Log.d("Tag", "responseObject People: ${People}")
@@ -127,41 +130,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-
-        //открываем подключение к базе данных
-//        database = databaseHelper?.readableDatabase
-
-        //получаем данных в Cursor при помощи SQL запроса
-//        userCursor = database?.rawQuery("SELECT * FROM ${DatabaseHelper.TABLE}", null)
-//        var valute: MutableList<Valute> = ArrayList()
-
-
-//        val source: List<Int> = Arrays.asList(1, 2, 3)
-//        val dest: List<Int> = Arrays.asList(5, 6, 7, 8, 9, 10)
-//        Collections.copy(dest, source)
-//        Collections.copy(valuteArray, valute)
-
-//        valuteArray.replaceAll { valute. -> valute.CharCode}
-//        adapter.notifyDataSetChanged()
-//        initRecycler()
-//        notifyRV()
-        //определяем какие столбцы из курсора будут вывозиться в ListView
-//        val header = arrayOf(DatabaseHelper.COLUMN_NAME, DatabaseHelper.COLUMN_YEAR)
-
-        //создаем адаптер и передаем в него курсор
-        /* userAdapter = SimpleCursorAdapter(
-                 this,
-                 android.R.layout.two_line_list_item,
-                 userCursor,
-                 header,
-                 intArrayOf(android.R.id.text1, android.R.id.text2),
-                 0)
-         userList?.adapter = userAdapter*/
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

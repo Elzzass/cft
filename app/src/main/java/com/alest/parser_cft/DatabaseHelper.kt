@@ -19,7 +19,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         //создаем таблицу в нашей базе данных
         db?.execSQL("CREATE TABLE $TABLE ($COLUMN_ID TEXT, $COLUMN_NUMCODE TEXT, $COLUMN_CHARCODE TEXT, $COLUMN_NOMINAL INTEGER, $COLUMN_NAME TEXT, $COLUMN_VALUE REAL, $COLUMN_PREVIOUS REAl)")
         //добавляем в базу данных одну строку
-        db?.execSQL("INSERT INTO $TABLE ($COLUMN_ID, $COLUMN_NUMCODE, $COLUMN_CHARCODE, $COLUMN_NOMINAL, $COLUMN_NAME, $COLUMN_VALUE, $COLUMN_PREVIOUS) VALUES ('R01010', '036', 'AUD', 1, 'Австралийский доллар', 55.3355, 55.2078)")
+//        db?.execSQL("INSERT INTO $TABLE ($COLUMN_ID, $COLUMN_NUMCODE, $COLUMN_CHARCODE, $COLUMN_NOMINAL, $COLUMN_NAME, $COLUMN_VALUE, $COLUMN_PREVIOUS) VALUES ('R01010+', '036+', 'AUD+', 1, 'Австралийский доллар+', 55.5555, 55.0000)")
     }
 
     //функция обновления базы данных, например при изменении версии базы данных
@@ -36,9 +36,12 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
         // select all query
         val select_query = "SELECT *FROM $TABLE"
-//        val db: SQLiteDatabase = this.getWritableDatabase()
-        val db: SQLiteDatabase = this.readableDatabase
+        val db: SQLiteDatabase = this.getWritableDatabase()
+//        val db: SQLiteDatabase = this.readableDatabase
+//        val db = this.readableDatabase
         val cursor = db.rawQuery(select_query, null)
+        Log.d("Tag", "getAllFromDB() cursor.columnCount: ${cursor.columnCount}")
+        Log.d("Tag", "getAllFromDB() cursor.moveToFirst(): ${cursor.moveToFirst()}")
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -53,6 +56,8 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                         cursor.getFloat(6),
 
                         )
+                Log.d("Tag", "getAllFromDB() cursor: ${cursor}")
+
                 /*val ID: String,
                 val NumCode: String = "999",
                 val CharCode: String,
@@ -84,7 +89,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val values = ContentValues()
 
 //        val values = Valute(id, numCode, charCode, nominal, name, value, previous)
-//        values.put("COLUMN_ID", valute.ID)
+        values.put("COLUMN_ID", valute.ID)
         values.put("NUMCODE", valute.NumCode)
         values.put("CHARCODE", valute.CharCode)
         values.put("NOMINAL", valute.Nominal)
@@ -92,10 +97,19 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         values.put("VALUE", valute.Value)
         values.put("PREVIOUS", valute.Previous)
 //        values.put("Description", des)
+        Log.d("Tag", "insert valute.ID: ${valute.ID}")
+        Log.d("Tag", "insert valute.NUMCODE: ${valute.NumCode}")
+        Log.d("Tag", "insert valute.CharCode: ${valute.CharCode}")
+        Log.d("Tag", "insert valute.NOMINAL: ${valute.Nominal}")
+        Log.d("Tag", "insert valute.NAME: ${valute.Name}")
+        Log.d("Tag", "insert valute.VALUE: ${valute.Value}")
+        Log.d("Tag", "insert valute.PREVIOUS: ${valute.Previous}")
 
         //inserting new row
-        db.insert(TABLE, null, values)
+        var ci = db.insert(TABLE, null, values)
+        Log.d("Tag", "insert ci: ${ci}")
         Log.d("Tag", "insert values: ${values}")
+        Log.d("Tag", "after insert getAllFromDB(): ${getAllFromDB()}")
 
         //close database connection
         db.close()
