@@ -4,12 +4,9 @@ import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.SimpleCursorAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_main.*
@@ -79,9 +76,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun getValues(view: View) {
-        Toast.makeText(
-            this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
-        ).show()
+
+        var sumRub = findViewById<TextView>(R.id.enter_rubles_edit_text).text
+        Log.d("Tag", "getValues 0: ${sumRub}")
+        Log.d("Tag", "getValues sumRub.isNotBlank(): ${sumRub.isNotBlank()}")
+        Log.d("Tag", "getValues sumRub.isNullOrEmpty(): ${!sumRub.isNullOrEmpty()}")
+        Log.d("Tag", "getValues umRub.isDigitsOnly(): ${sumRub.isDigitsOnly()}")
+
+//        if (sumRub.isNotBlank() && sumRub.isNullOrEmpty() && sumRub.isDigitsOnly()) {
+        if (sumRub.isNotBlank() && !sumRub.isNullOrEmpty() ) {
+            try {
+                Log.d("Tag", "getValues 1: ${sumRub}")
+
+                var res = sumRub.toString().toFloat() / (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Value
+                    ?: 0f)
+                Log.d("Tag", "getValues res: ${res}")
+
+                findViewById<TextView>(R.id.convert_result_textview).text = res.toString()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.d("Tag", "getValues err: ${sumRub}")
+
+                Toast.makeText(
+                    this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 //        findViewById<TextView>(R.id.convert_choice_textview).text = "Выбрана валюта: 2" +
 //                valuteList.find { it.CharCode.equals(spinner.selectedItem.toString()) }
     }
