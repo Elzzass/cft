@@ -3,14 +3,16 @@ package com.alest.parser_cft
 import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.SimpleCursorAdapter
-import android.widget.TextView
+import android.view.View
+import android.widget.*
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.httpGet
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 //        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 //        adapter = recyclerView?.adapter as RecyclerView.Adapter<*>
         //добавляем обработчик для кнопки вызова функции request()
@@ -43,6 +46,20 @@ class MainActivity : AppCompatActivity() {
 //        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         initRecycler()
+        // Create an ArrayAdapter
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.city_list, android.R.layout.simple_spinner_item
+        )
+
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Apply the adapter to the spinner
+        spinner.adapter = adapter
+        // Spinner element
+        // Spinner element
+//        val spinner = findViewById(R.id.spinner) as Spinner
+
         findViewById<Button>(R.id.http_request_button).setOnClickListener {
             request()
         }
@@ -50,7 +67,11 @@ class MainActivity : AppCompatActivity() {
             clearTable()
         }
     }
-
+    fun getValues(view: View) {
+        Toast.makeText(
+            this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
+        ).show()
+    }
     private fun clearTable() {
         //открываем подключение к базе данных
 //        database = databaseHelper?.readableDatabase
@@ -83,11 +104,16 @@ class MainActivity : AppCompatActivity() {
 //        adapter = ValutaRecyclerAdapter(this, databaseHelper?.getAllFromDB()!!) //Создаем экземпляр класса CarsRecyclerAdapter
         valuteList.clear()
         valuteList.addAll(databaseHelper?.getAllFromDB()!!)
-        adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
+        adapter =
+            ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
 //        recyclerView.adapter = adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
-        findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
+        findViewById<RecyclerView>(R.id.recycler_view).adapter =
+            adapter //устанавливаем наш адаптер в качестве адаптера для нашего RecyclerView
         adapter.notifyDataSetChanged()
-        Log.d("Tag", "initRecycler databaseHelper?.getAllFromDB()!!: ${databaseHelper?.getAllFromDB()!!}")
+        Log.d(
+            "Tag",
+            "initRecycler databaseHelper?.getAllFromDB()!!: ${databaseHelper?.getAllFromDB()!!}"
+        )
         Log.d("Tag", "initRecycler adapter: ${adapter}")
         Log.d("Tag", "initRecycler valuteList: ${valuteList}")
 
