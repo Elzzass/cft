@@ -4,14 +4,15 @@ import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.SimpleCursorAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,18 +45,26 @@ class MainActivity : AppCompatActivity() {
 //        valute.forEach { it -> valuteList.add(it) }
 //        Collections.copy(valuteList, databaseHelper?.getAllFromDB()!!)
 //        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
-        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
+//        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         initRecycler()
+        var codeValutaList : MutableList<String> = ArrayList()
+        valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
         // Create an ArrayAdapter
-        val adapter = ArrayAdapter.createFromResource(
+     /*   val adapter = ArrayAdapter.createFromResource(
             this,
+//            codeValutaList, android.R.layout.simple_spinner_item
             R.array.city_list, android.R.layout.simple_spinner_item
-        )
+        )*/
+        val catAdapter: ArrayAdapter<String>
+        catAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, codeValutaList)
+
+        spinner.adapter = catAdapter
+
 
 // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Apply the adapter to the spinner
-        spinner.adapter = adapter
+//        spinner.adapter = adapter
         // Spinner element
         // Spinner element
 //        val spinner = findViewById(R.id.spinner) as Spinner
@@ -71,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(
             this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
         ).show()
+
     }
     private fun clearTable() {
         //открываем подключение к базе данных
