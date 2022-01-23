@@ -15,6 +15,50 @@
         android:layout_alignParentTop="true"
         android:textColor="@android:color/white"
         android:textSize="28sp" />
+    <TextView
+        android:id="@+id/valute_char_code_label_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Код валюты: "
+        android:layout_margin="5dp"
+        android:layout_below ="@+id/valute_name_textview"
+        android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/valute_char_code_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AUD"
+        android:layout_margin="5dp"
+        android:layout_below ="@+id/valute_name_textview"
+        android:layout_toEndOf = "@+id/valute_char_code_label_textview"
+        android:textColor="@android:color/white"
+        android:textSize="28sp" />
+    <TextView
+        android:id="@+id/valute_nominal_label_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Номинал валюты: "
+        android:layout_margin="5dp"
+        android:layout_below ="@+id/valute_char_code_textview"
+        android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/valute_nominal_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_margin="5dp"
+        android:layout_below ="@+id/valute_char_code_textview"
+        android:layout_toEndOf = "@+id/valute_nominal_label_textview"
+        android:textColor="@android:color/white"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_value_label_textview"
@@ -22,7 +66,7 @@
         android:layout_height="wrap_content"
         android:text="Курс текущий: "
         android:layout_margin="5dp"
-        android:layout_below ="@+id/valute_name_textview"
+        android:layout_below ="@+id/valute_nominal_textview"
         android:layout_alignParentLeft="true"
         android:textColor="@android:color/white"
         android:textSize="28sp"
@@ -34,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="777.777"
         android:layout_margin="5dp"
-        android:layout_below ="@+id/valute_name_textview"
+        android:layout_below ="@+id/valute_nominal_textview"
         android:layout_toEndOf = "@+id/valute_value_label_textview"
         android:textColor="@android:color/white"
         android:textSize="28sp" />
@@ -43,7 +87,7 @@
         android:id="@+id/valute_prev_value_label_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Курс текущий: "
+        android:text="Курс прошлый: "
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_value_textview"
         android:layout_alignParentLeft="true"
@@ -69,7 +113,7 @@
         android:text="ID: "
         android:layout_margin="5dp"
         android:layout_alignParentLeft="true"
-        android:layout_below ="@+id/valute_value_label_textview"
+        android:layout_below ="@+id/valute_prev_value_label_textview"
         android:textColor="@android:color/white"
         android:textSize="28sp"
         android:textStyle="bold" />
@@ -86,28 +130,7 @@
         android:textColor="@android:color/white"
         android:textSize="28sp" />
 
-    <TextView
-        android:id="@+id/valute_char_code_label_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CharCode: "
-        android:layout_margin="5dp"
-        android:layout_below ="@+id/valute_prev_value_textview"
-        android:layout_toEndOf = "@+id/valute_id_textview"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/valute_char_code_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AUD"
-        android:layout_margin="5dp"
-        android:layout_below ="@+id/valute_name_textview"
-        android:layout_toEndOf = "@+id/valute_char_code_label_textview"
-        android:textColor="@android:color/white"
-        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_num_code_label_textview"
@@ -115,7 +138,7 @@
         android:layout_height="wrap_content"
         android:text="NumCode: "
         android:layout_margin="5dp"
-        android:layout_below ="@+id/valute_value_textview"
+        android:layout_below ="@+id/valute_prev_value_textview"
         android:layout_toEndOf = "@+id/valute_id_textview"
         android:textColor="@android:color/white"
         android:textSize="28sp"
@@ -127,7 +150,7 @@
         android:layout_height="wrap_content"
         android:text="036"
         android:layout_margin="5dp"
-        android:layout_below ="@+id/valute_value_textview"
+        android:layout_below ="@+id/valute_prev_value_textview"
         android:layout_toEndOf = "@+id/valute_num_code_label_textview"
         android:textColor="@android:color/white"
         android:textSize="28sp" />
