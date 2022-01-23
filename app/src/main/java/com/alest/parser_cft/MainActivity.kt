@@ -1,7 +1,10 @@
 package com.alest.parser_cft
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -26,10 +29,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: RecyclerView.Adapter<*>
     var userCursor: Cursor? = null
     var userAdapter: SimpleCursorAdapter? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        val editor: SharedPreferences.Editor = preferences.edit()
 //        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 //        adapter = recyclerView?.adapter as RecyclerView.Adapter<*>
         //добавляем обработчик для кнопки вызова функции request()
@@ -38,22 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         //инициализируем наш DatabaseHelper
         databaseHelper = DatabaseHelper(applicationContext)
-//        var valute = databaseHelper?.getAllFromDB()!!
-//        valute.forEach { it -> valuteList.add(it) }
-//        Collections.copy(valuteList, databaseHelper?.getAllFromDB()!!)
-//        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
-//        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         initRecycler()
         initSpinner()
-
-
-// Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Apply the adapter to the spinner
-//        spinner.adapter = adapter
-        // Spinner element
-        // Spinner element
-//        val spinner = findViewById(R.id.spinner) as Spinner
 
         findViewById<Button>(R.id.http_request_button).setOnClickListener {
             request()
@@ -99,13 +91,16 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Tag", "getValues res: ${res}")
 //                String.format("%.3f", number)
 //                findViewById<TextView>(R.id.convert_result_textview).text = res.toString()
-                findViewById<TextView>(R.id.convert_result_textview).text = String.format("%.4f", res)
+                findViewById<TextView>(R.id.convert_result_textview).text = String.format(
+                    "%.4f",
+                    res
+                )
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("Tag", "getValues err: ${sumRub}")
 
                 Toast.makeText(
-                    this, "Введена не корректная сумма в рублях" , Toast.LENGTH_LONG
+                    this, "Введена не корректная сумма в рублях", Toast.LENGTH_LONG
 //                    this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
                 ).show()
             }
@@ -157,7 +152,9 @@ class MainActivity : AppCompatActivity() {
         )
         Log.d("Tag", "initRecycler adapter: ${adapter}")
         Log.d("Tag", "initRecycler valuteList: ${valuteList}")
-
+//        var date = preferences.getString("Date","Нет данных")
+        val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        findViewById<TextView>(R.id.date_textview).text = preferences.getString("Date","Нет данных")
     }
 
     private fun request() {
@@ -181,6 +178,13 @@ class MainActivity : AppCompatActivity() {
 //                notifyRV()
                 valuteList.add(valute)
             }
+            val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
+            val editor: SharedPreferences.Editor = preferences.edit()
+//            val editor = getPreferences(Context.MODE_PRIVATE).edit()
+            editor.putString("Date",  dataFromResponse?.Date)
+            editor.apply()
+
+
             Log.d("Tag", "request adapter: ${adapter}")
 //            adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
 //            adapter.notifyDataSetChanged()
