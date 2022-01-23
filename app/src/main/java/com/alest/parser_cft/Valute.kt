@@ -4,10 +4,10 @@ import java.util.*
 
 data class Valute(
         val ID: String,
-        val NumCode: String = "999",
+        val NumCode: String,
         val CharCode: String,
         val Nominal: Int,
-        val Name: String ="AD",
+        val Name: String,
         val Value: Float,
         val Previous: Float
 

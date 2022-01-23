@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 //Создаем класс CarsRecyclerAdapter и наследуем его от класса RecyclerView.Adapter
 //class CarsRecyclerAdapter(context: Context, private val cars: List<Car>)
-class ValutaRecyclerAdapter(context: Context, private val cars: List<Valute>)
+class ValutaRecyclerAdapter(context: Context, private val valutaList: List<Valute>)
     : RecyclerView.Adapter<ValutaRecyclerAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
 
@@ -21,24 +21,32 @@ class ValutaRecyclerAdapter(context: Context, private val cars: List<Valute>)
 
     //Задаем значения для элемента списка
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(cars[position])
+        holder.bind(valutaList[position])
     }
 
     //Получаем количество элементов в списке
     override fun getItemCount(): Int {
-        return cars.size
+        return valutaList.size
     }
 
-    class ViewHolder constructor(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
         val charCodeView: TextView = view.findViewById(R.id.valute_char_code_textview)
+        val numCodeView: TextView = view.findViewById(R.id.valute_num_code_textview)
         val valueView: TextView = view.findViewById(R.id.valute_value_textview)
+        val prevValueView: TextView = view.findViewById(R.id.valute_prev_value_textview)
         val nameView: TextView = view.findViewById(R.id.valute_name_textview)
+        val idView: TextView = view.findViewById(R.id.valute_id_textview)
+        val nominalView: TextView = view.findViewById(R.id.valute_nominal_textview)
 
-//        fun bind(car: Car) {
+        //        fun bind(car: Car) {
         fun bind(valute: Valute) {
-            charCodeView.text = valute.CharCode
-            valueView.text = valute.NumCode
             nameView.text = valute.Name
+            charCodeView.text = valute.CharCode
+            nominalView.text = valute.Nominal.toString()
+            valueView.text = valute.Value.toString()
+            prevValueView.text = valute.Previous.toString()
+            idView.text = valute.ID
+            numCodeView.text = valute.NumCode
         }
     }
 }
