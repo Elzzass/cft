@@ -81,7 +81,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(
             this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
         ).show()
-
+        findViewById<TextView>(R.id.convert_choice_textview).text = "Выбрана валюта: 2" +
+                valuteList.find { it.CharCode.equals(spinner.selectedItem.toString()) }
     }
     private fun clearTable() {
         //открываем подключение к базе данных
