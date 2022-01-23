@@ -44,20 +44,7 @@ class MainActivity : AppCompatActivity() {
 //        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
 //        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         initRecycler()
-        var codeValutaList : MutableList<String> = ArrayList()
-//        valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
-        valuteList.forEach{ it -> codeValutaList.add(it.Name)}
-        // Create an ArrayAdapter
-     /*   val adapter = ArrayAdapter.createFromResource(
-            this,
-//            codeValutaList, android.R.layout.simple_spinner_item
-            R.array.city_list, android.R.layout.simple_spinner_item
-        )*/
-        val catAdapter: ArrayAdapter<String>
-//        catAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, codeValutaList)
-        catAdapter = ArrayAdapter<String>(this, R.layout.spinner_layout, codeValutaList)
-
-        spinner.adapter = catAdapter
+        initSpinner()
 
 
 // Specify the layout to use when the list of choices appears
@@ -75,6 +62,24 @@ class MainActivity : AppCompatActivity() {
             clearTable()
         }
     }
+
+    private fun initSpinner() {
+        var codeValutaList: MutableList<String> = ArrayList()
+        //        valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
+        valuteList.forEach { it -> codeValutaList.add(it.Name) }
+        // Create an ArrayAdapter
+        /*   val adapter = ArrayAdapter.createFromResource(
+            this,
+//            codeValutaList, android.R.layout.simple_spinner_item
+            R.array.city_list, android.R.layout.simple_spinner_item
+        )*/
+        val catAdapter: ArrayAdapter<String>
+        //        catAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, codeValutaList)
+        catAdapter = ArrayAdapter<String>(this, R.layout.spinner_layout, codeValutaList)
+
+        spinner.adapter = catAdapter
+    }
+
     fun getValues(view: View) {
 
         var sumRub = findViewById<TextView>(R.id.enter_rubles_edit_text).text
@@ -189,8 +194,7 @@ class MainActivity : AppCompatActivity() {
             textView.post { textView.text = dataFromResponse.toString() }
 //            valuteArray = databaseHelper?.getAllFromDB()!!
             initRecycler()
-//            notifyRV()
-
+            initSpinner()
         }
     }
 
