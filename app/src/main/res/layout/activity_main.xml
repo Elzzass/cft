@@ -17,7 +17,7 @@
         tools:listitem="@layout/cell" />
 
     <TextView
-        android:id="@+id/okhttp_response"
+        android:id="@+id/okhttp_response_textview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="RESPONSE"
@@ -25,7 +25,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/http_request"
+        android:id="@+id/http_request_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REQUEST" />
@@ -34,4 +34,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Очистить" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="left|top"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp">
+
+        <EditText
+            android:id="@+id/etWidth1"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:hint="Введите сумму в рублях"
+            android:inputType="numberDecimal">
+
+        </EditText>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="101dp"
+            android:layout_height="35dp" />
+
+        <TextView
+            android:id="@+id/convert_sum_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="000.000"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

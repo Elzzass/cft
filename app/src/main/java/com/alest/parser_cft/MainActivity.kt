@@ -1,7 +1,6 @@
 package com.alest.parser_cft
 
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 //        adapter = recyclerView?.adapter as RecyclerView.Adapter<*>
         //добавляем обработчик для кнопки вызова функции request()
 //        request()
-        textView = findViewById(R.id.okhttp_response)
+        textView = findViewById(R.id.okhttp_response_textview)
 
         //инициализируем наш DatabaseHelper
         databaseHelper = DatabaseHelper(applicationContext)
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 //        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         initRecycler()
-        findViewById<Button>(R.id.http_request).setOnClickListener {
+        findViewById<Button>(R.id.http_request_button).setOnClickListener {
             request()
         }
         findViewById<Button>(R.id.delete_db).setOnClickListener {
