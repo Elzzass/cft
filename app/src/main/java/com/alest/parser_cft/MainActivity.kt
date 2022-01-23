@@ -84,21 +84,24 @@ class MainActivity : AppCompatActivity() {
         Log.d("Tag", "getValues umRub.isDigitsOnly(): ${sumRub.isDigitsOnly()}")
 
 //        if (sumRub.isNotBlank() && sumRub.isNullOrEmpty() && sumRub.isDigitsOnly()) {
-        if (sumRub.isNotBlank() && !sumRub.isNullOrEmpty() ) {
+        if (sumRub.isNotBlank() && !sumRub.isNullOrEmpty() && spinner.selectedItem != null && !valuteList.isNullOrEmpty() ) {
             try {
                 Log.d("Tag", "getValues 1: ${sumRub}")
 
-                var res = sumRub.toString().toFloat() / (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Value
+                var res = sumRub.toString().toFloat() * (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Nominal
+                    ?: 0f).toFloat() / (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Value
                     ?: 0f)
                 Log.d("Tag", "getValues res: ${res}")
-
-                findViewById<TextView>(R.id.convert_result_textview).text = res.toString()
+//                String.format("%.3f", number)
+//                findViewById<TextView>(R.id.convert_result_textview).text = res.toString()
+                findViewById<TextView>(R.id.convert_result_textview).text = String.format("%.4f", res)
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("Tag", "getValues err: ${sumRub}")
 
                 Toast.makeText(
-                    this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
+                    this, "Введена не корректная сумма в рублях" , Toast.LENGTH_LONG
+//                    this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
                 ).show()
             }
         }

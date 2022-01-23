@@ -38,7 +38,7 @@
         android:id="@+id/convert_promt_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Конвертировать указанну сумму в рублях "
+        android:text="Конвертировать указанную сумму в рублях "
         android:textSize="20sp" />
     <Spinner
         android:id="@+id/spinner"
@@ -51,30 +51,35 @@
         android:layout_gravity="bottom"
         android:gravity="left|top"
         android:paddingTop="2dp"
-        android:paddingBottom="2dp">
+        android:paddingBottom="2dp"
+        android:weightSum="100">
 
         <EditText
             android:id="@+id/enter_rubles_edit_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="28sp"
             android:hint="Введите сумму в рублях"
+            android:layout_weight="30"
             android:inputType="numberDecimal">
 
         </EditText>
 
         <TextView
             android:id="@+id/convert_result_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="000"
-            android:textSize="20sp" />
+            android:text="0.0000"
+            android:layout_weight="40"
+            android:textSize="28sp" />
         <Button
             android:id="@+id/convert_valuta_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="getValues"
-            android:text="Конв" />
+            android:layout_weight="30"
+            android:textSize="12sp"
+            android:text="Конвертировать" />
 
     </LinearLayout>
 
