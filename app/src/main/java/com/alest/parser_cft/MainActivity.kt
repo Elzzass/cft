@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         initRecycler()
         var codeValutaList : MutableList<String> = ArrayList()
         valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
+//        valuteList.forEach{ it -> codeValutaList.add(it.Name)}
         // Create an ArrayAdapter
      /*   val adapter = ArrayAdapter.createFromResource(
             this,

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="top|center"
+    android:gravity="top|left"
     android:weightSum="100"
     android:orientation="vertical">
 
@@ -34,7 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Очистить" />
-
+    <TextView
+        android:id="@+id/convert_promt_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Конвертировать указанну сумму в рублях "
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/convert_choice_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбрана валюта: "
+        android:textSize="20sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,22 +64,21 @@
         </EditText>
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="101dp"
-            android:layout_height="35dp"
-            android:entries="@array/city_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             />
         <TextView
             android:id="@+id/convert_sum_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="000.000"
+            android:text="000"
             android:textSize="20sp" />
         <Button
             android:id="@+id/convert_valuta_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="getValues"
-            android:text="Конвертировать" />
+            android:text="Конв" />
 
     </LinearLayout>
 
