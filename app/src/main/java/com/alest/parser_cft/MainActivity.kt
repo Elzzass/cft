@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
 //        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
         initRecycler()
         var codeValutaList : MutableList<String> = ArrayList()
-        valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
-//        valuteList.forEach{ it -> codeValutaList.add(it.Name)}
+//        valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
+        valuteList.forEach{ it -> codeValutaList.add(it.Name)}
         // Create an ArrayAdapter
      /*   val adapter = ArrayAdapter.createFromResource(
             this,
@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
             R.array.city_list, android.R.layout.simple_spinner_item
         )*/
         val catAdapter: ArrayAdapter<String>
-        catAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, codeValutaList)
+//        catAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, codeValutaList)
+        catAdapter = ArrayAdapter<String>(this, R.layout.spinner_layout, codeValutaList)
 
         spinner.adapter = catAdapter
 
@@ -81,8 +82,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(
             this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
         ).show()
-        findViewById<TextView>(R.id.convert_choice_textview).text = "Выбрана валюта: 2" +
-                valuteList.find { it.CharCode.equals(spinner.selectedItem.toString()) }
+//        findViewById<TextView>(R.id.convert_choice_textview).text = "Выбрана валюта: 2" +
+//                valuteList.find { it.CharCode.equals(spinner.selectedItem.toString()) }
     }
     private fun clearTable() {
         //открываем подключение к базе данных
