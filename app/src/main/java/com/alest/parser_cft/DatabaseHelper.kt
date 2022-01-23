@@ -56,7 +56,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                         cursor.getFloat(6),
 
                         )
-                Log.d("Tag", "getAllFromDB() cursor: ${cursor}")
+//                Log.d("Tag", "getAllFromDB() cursor: ${cursor}")
 
                 /*val ID: String,
                 val NumCode: String = "999",

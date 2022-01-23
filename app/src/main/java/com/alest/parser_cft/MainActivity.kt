@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.database.Cursor
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -13,6 +12,10 @@ import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,13 +32,18 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: RecyclerView.Adapter<*>
     var userCursor: Cursor? = null
     var userAdapter: SimpleCursorAdapter? = null
-
+    lateinit var dateTimeInLongTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
         val editor: SharedPreferences.Editor = preferences.edit()
+
+        var dateTime: String
+        var calendar: Calendar
+        var simpleDateFormat: SimpleDateFormat
+
 //        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 //        adapter = recyclerView?.adapter as RecyclerView.Adapter<*>
         //добавляем обработчик для кнопки вызова функции request()
@@ -46,6 +54,22 @@ class MainActivity : AppCompatActivity() {
         databaseHelper = DatabaseHelper(applicationContext)
         initRecycler()
         initSpinner()
+
+        // get the Long type value of the current system date
+        val dateValueInLong: Long = System.currentTimeMillis()
+
+//        dateTimeInLongTextView.text = dateValueInLong.toString()
+//        LocalDateTime.now()
+        // different format type to format the
+        // current date and time of the system
+        // format type 1
+
+//        val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        var dateFromResponse = preferences.getString("Date", "Нет данных")
+        Log.d("Tag", "date dateFromResponse: ${dateFromResponse}")
+        if (isOneDatePass(dateFromResponse) && savedInstanceState==null) {
+            request()
+        }
 
         findViewById<Button>(R.id.http_request_button).setOnClickListener {
             request()
@@ -81,11 +105,12 @@ class MainActivity : AppCompatActivity() {
         Log.d("Tag", "getValues umRub.isDigitsOnly(): ${sumRub.isDigitsOnly()}")
 
 //        if (sumRub.isNotBlank() && sumRub.isNullOrEmpty() && sumRub.isDigitsOnly()) {
-        if (sumRub.isNotBlank() && !sumRub.isNullOrEmpty() && spinner.selectedItem != null && !valuteList.isNullOrEmpty() ) {
+        if (sumRub.isNotBlank() && !sumRub.isNullOrEmpty() && spinner.selectedItem != null && !valuteList.isNullOrEmpty()) {
             try {
                 Log.d("Tag", "getValues 1: ${sumRub}")
 
-                var res = sumRub.toString().toFloat() * (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Nominal
+                var res = sumRub.toString()
+                    .toFloat() * (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Nominal
                     ?: 0f).toFloat() / (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Value
                     ?: 0f)
                 Log.d("Tag", "getValues res: ${res}")
@@ -108,6 +133,7 @@ class MainActivity : AppCompatActivity() {
 //        findViewById<TextView>(R.id.convert_choice_textview).text = "Выбрана валюта: 2" +
 //                valuteList.find { it.CharCode.equals(spinner.selectedItem.toString()) }
     }
+
     private fun clearTable() {
         //открываем подключение к базе данных
 //        database = databaseHelper?.readableDatabase
@@ -128,11 +154,12 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView.adapter?.notifyDataSetChanged()
     }
 
-    private fun notifyRV() {
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.adapter?.notifyDataSetChanged()
-        adapter.notifyDataSetChanged()
 
+    fun getCurrentDate(): String? {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+        dateFormat.timeZone = TimeZone.getDefault()
+        val today = Calendar.getInstance().time
+        return dateFormat.format(today)
     }
 
     private fun initRecycler() {
@@ -152,10 +179,58 @@ class MainActivity : AppCompatActivity() {
         )
         Log.d("Tag", "initRecycler adapter: ${adapter}")
         Log.d("Tag", "initRecycler valuteList: ${valuteList}")
-//        var date = preferences.getString("Date","Нет данных")
-        val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        findViewById<TextView>(R.id.date_textview).text = preferences.getString("Date","Нет данных")
+
+
+//        var dateTime: String
+//        var calendar: Calendar
+//        var simpleDateFormat: SimpleDateFormat
+//        calendar = Calendar.getInstance()
+//        simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss aaa z")
+//        dateTime = simpleDateFormat.format(calendar.time).toString()
+        /*dateTime = simpleDateFormat.format(preferences.getString(
+            "Date",
+            "Нет данных"
+        )).toString()*/
+//        val dtStart = "2010-10-15T09:27:37Z" //"2022-01-22T11:30:00+03:00"
+
+//        findViewById<TextView>(R.id.date_textview).text= dateTime
+//        val date = Date(location.getTime())
+
+
+//        findViewById<TextView>(R.id.date_textview).text = preferences.getString(
+//            "Date",
+//            "Нет данных"
+//        )
     }
+
+    private fun isOneDatePass(dateFromResponse: String?): Boolean {
+        var result = false
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+        //        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        try {
+            val dateFormatFromResponse = format.parse(dateFromResponse)
+            //            val date = format.parse(dtStart)
+            Log.d("Tag", "date format: ${dateFormatFromResponse}")
+
+            findViewById<TextView>(R.id.date_textview).text = dateFormatFromResponse.toString()
+            Log.d("Tag", "date getCurrentDate(): ${getCurrentDate()}")
+            Log.d("Tag", "date dateFormatFromResponse.time: ${dateFormatFromResponse.time}")
+            Log.d("Tag", "date Calendar.getInstance().time: ${Calendar.getInstance().time.time}")
+            var deltaTime = Calendar.getInstance().time.time - dateFormatFromResponse.time
+            Log.d("Tag", "date deltaTime ${deltaTime}")
+            Log.d("Tag", "date deltaTime > 86_400_000${deltaTime > 86_400_000}")
+
+            if ((Calendar.getInstance().time.time - dateFormatFromResponse.time) > 86_400_000) {
+                result = true
+            }
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            Log.d("Tag", "date format ParseException: ${e}")
+
+        }
+        return result
+    }
+
 
     private fun request() {
         //при помощи расширения httpGet() выполняем наш запрос и получаем данные в функции responseString
@@ -178,11 +253,13 @@ class MainActivity : AppCompatActivity() {
 //                notifyRV()
                 valuteList.add(valute)
             }
-            val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
-            val editor: SharedPreferences.Editor = preferences.edit()
+//            val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
+//            val editor: SharedPreferences.Editor = preferences.edit()
 //            val editor = getPreferences(Context.MODE_PRIVATE).edit()
-            editor.putString("Date",  dataFromResponse?.Date)
-            editor.apply()
+//            editor.putString("Date", dataFromResponse?.Date)
+            getPreferences(Context.MODE_PRIVATE).edit().putString("Date", dataFromResponse?.Date)
+                .apply()
+//            editor.apply()
 
 
             Log.d("Tag", "request adapter: ${adapter}")
