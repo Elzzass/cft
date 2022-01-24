@@ -100,27 +100,37 @@ class MainActivity : AppCompatActivity() {
         URL.httpGet().responseObject(ResponseData.Deserializer()) { request, response, result ->
             val (dataFromResponse, err) = result
             Log.d("Tag", "responseObject result: ${result}")
+            Log.d("Tag", "responseObject result..component2(): ${result.component2()}")
+            Log.d("Tag", "responseObject result..component1(): ${result.component1()}")
             valuteList.clear()
             dataFromResponse?.Valute?.values?.forEach { valute ->
                 Log.d("Tag", "request valute: ${valute}")
                 databaseHelper?.addValuta(valute)
                 valuteList.add(valute)
             }
-            getPreferences(Context.MODE_PRIVATE).edit().putString("Date", dataFromResponse?.Date).apply()
+
 
             Log.d("Tag", "request adapter: ${adapter}")
 //            adapter = ValutaRecyclerAdapter(this, valuteList) //Создаем экземпляр класса CarsRecyclerAdapter
 //            adapter.notifyDataSetChanged()
             Log.d("Tag", "responseObject valuteList: ${valuteList}")
 //            Log.d("Tag", "responseObject databaseHelper?.getAllFromDB(): ${databaseHelper?.getAllFromDB()!!}")
-            Log.d("Tag", "responseObject err: ${err}")
+            Log.d("Tag", "responseObject err.localizedMessage: ${err?.localizedMessage}")
+            Log.d("Tag", "responseObject err.cause: ${err?.cause}")
+            Log.d("Tag", "responseObject err.message: ${err?.message}")
+            Log.d("Tag", "responseObject err.causedByInterruption: ${err?.causedByInterruption}")
+            Log.d("Tag", "responseObject response.statusCode: ${response.statusCode}")
             Log.d("Tag", "responseObject dataFromResponse: ${dataFromResponse}")
             Log.d("Tag", "responseObject People: ${People}")
             Log.d("Tag", "responseObject str: ${str}")
 //            textView.post { textView.text = str }
-            textView.post { textView.text = dataFromResponse.toString() }
-            dateTextView.post { dateTextView.text = "Дата: " + dataFromResponse?.Date }
-
+            if (response.statusCode == 200) {
+                getPreferences(Context.MODE_PRIVATE).edit().putString("Date", dataFromResponse?.Date).apply()
+                textView.post { textView.text = dataFromResponse.toString() }
+                dateTextView.post { dateTextView.text = "Дата: " + dataFromResponse?.Date }
+            } else {
+                Toast.makeText(applicationContext, "Нет данных. Ошибка в сети!!!", Toast.LENGTH_SHORT).show()
+            }
 //            valuteArray = databaseHelper?.getAllFromDB()!!
             initRecycler()
             initSpinner()
