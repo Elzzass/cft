@@ -1,7 +1,5 @@
 package com.alest.parser_cft
 
-import java.util.*
-
 data class Valute(
         val ID: String,
         val NumCode: String,
@@ -10,5 +8,4 @@ data class Valute(
         val Name: String,
         val Value: Float,
         val Previous: Float
-
 )
