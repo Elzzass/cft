@@ -2,7 +2,6 @@ package com.alest.parser_cft
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -54,19 +52,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initSpinner() {
         var codeValutaList: MutableList<String> = ArrayList()
-        //        valuteList.forEach{ it -> codeValutaList.add(it.CharCode)}
-        valuteList.forEach { it -> codeValutaList.add(it.Name) }
-        // Create an ArrayAdapter
-        /*   val adapter = ArrayAdapter.createFromResource(
-            this,
-//            codeValutaList, android.R.layout.simple_spinner_item
-            R.array.city_list, android.R.layout.simple_spinner_item
-        )*/
-        val catAdapter: ArrayAdapter<String>
-        //        catAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, codeValutaList)
-        catAdapter = ArrayAdapter<String>(this, R.layout.spinner_layout, codeValutaList)
-
-        spinner.adapter = catAdapter
+        valuteList.forEach { codeValutaList.add(it.Name) }
+        val spinnerAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, R.layout.spinner_layout, codeValutaList)
+        spinner.adapter = spinnerAdapter
     }
 
     fun getValues(view: View) {
