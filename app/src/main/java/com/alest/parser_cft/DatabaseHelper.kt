@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 
 class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, SCHEMA) {
     override fun onCreate(db: SQLiteDatabase?) {
@@ -20,8 +19,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val selectAllQuery = "SELECT *FROM $TABLE"
         val db: SQLiteDatabase = this.getWritableDatabase()
         val cursor = db.rawQuery(selectAllQuery, null)
-        Log.d("Tag", "getAllFromDB() cursor.columnCount: ${cursor.columnCount}")
-        Log.d("Tag", "getAllFromDB() cursor.moveToFirst(): ${cursor.moveToFirst()}")
         if (cursor.moveToFirst()) {
             do {
                 val valuteModel = Valute(
@@ -49,21 +46,8 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         values.put("NAME", valuta.Name)
         values.put("VALUE", valuta.Value)
         values.put("PREVIOUS", valuta.Previous)
-
-        Log.d("Tag", "insert valute.ID: ${valuta.ID}")
-        Log.d("Tag", "insert valute.NUMCODE: ${valuta.NumCode}")
-        Log.d("Tag", "insert valute.CharCode: ${valuta.CharCode}")
-        Log.d("Tag", "insert valute.NOMINAL: ${valuta.Nominal}")
-        Log.d("Tag", "insert valute.NAME: ${valuta.Name}")
-        Log.d("Tag", "insert valute.VALUE: ${valuta.Value}")
-        Log.d("Tag", "insert valute.PREVIOUS: ${valuta.Previous}")
-
-        var ci = db.insert(TABLE, null, values)
-        Log.d("Tag", "insert ci: ${ci}")
-        Log.d("Tag", "insert values: ${values}")
-        Log.d("Tag", "after insert getAllFromDB(): ${getAllFromDB()}")
-
-        db.close()
+        db.insert(TABLE, null, values)
+          db.close()
     }
 
     fun deleteDB() {
@@ -74,15 +58,15 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
 
     companion object {
-        private const val DATABASE_NAME = "valuta.db" //имя базы данных
-        private const val SCHEMA = 1 //версия базы данных
+        private const val DATABASE_NAME = "valuta.db"
+        private const val SCHEMA = 1
 
-        const val TABLE = "valutes" //название таблицы
-        const val COLUMN_ID = "COLUMN_ID" //имя столбца с id
+        const val TABLE = "valutes"
+        const val COLUMN_ID = "COLUMN_ID"
         const val COLUMN_NUMCODE = "numcode"
         const val COLUMN_CHARCODE = "charcode"
         const val COLUMN_NOMINAL = "nominal"
-        const val COLUMN_NAME = "name" //имя столбца с именем
+        const val COLUMN_NAME = "name" 
         const val COLUMN_VALUE = "value"
         const val COLUMN_PREVIOUS = "previous"
     }
