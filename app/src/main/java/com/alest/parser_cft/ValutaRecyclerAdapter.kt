@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-//Создаем класс CarsRecyclerAdapter и наследуем его от класса RecyclerView.Adapter
-//class CarsRecyclerAdapter(context: Context, private val cars: List<Car>)
 class ValutaRecyclerAdapter(context: Context, private val valutaList: List<Valute>)
     : RecyclerView.Adapter<ValutaRecyclerAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)

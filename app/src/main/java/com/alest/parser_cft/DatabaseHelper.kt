@@ -17,9 +17,9 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun getAllFromDB(): ArrayList<Valute>? {
         val arrayList: ArrayList<Valute> = ArrayList()
-        val select_query = "SELECT *FROM $TABLE"
+        val selectAllQuery = "SELECT *FROM $TABLE"
         val db: SQLiteDatabase = this.getWritableDatabase()
-        val cursor = db.rawQuery(select_query, null)
+        val cursor = db.rawQuery(selectAllQuery, null)
         Log.d("Tag", "getAllFromDB() cursor.columnCount: ${cursor.columnCount}")
         Log.d("Tag", "getAllFromDB() cursor.moveToFirst(): ${cursor.moveToFirst()}")
         if (cursor.moveToFirst()) {
