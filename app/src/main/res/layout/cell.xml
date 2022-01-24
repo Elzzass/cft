@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/cardview_light_background"
     android:gravity="start|top">
-
 
     <TextView
         android:id="@+id/valute_name_textview"
@@ -13,8 +12,10 @@
         android:text="Австралийский доллар"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textColor="@android:color/white"
-        android:textSize="28sp" />
+        android:layout_margin="5dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/valute_char_code_label_textview"
         android:layout_width="wrap_content"
@@ -23,9 +24,8 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_name_textview"
         android:layout_alignParentLeft="true"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_char_code_textview"
@@ -35,8 +35,9 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_name_textview"
         android:layout_toEndOf = "@+id/valute_char_code_label_textview"
-        android:textColor="@android:color/white"
-        android:textSize="28sp" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/valute_nominal_label_textview"
         android:layout_width="wrap_content"
@@ -45,9 +46,8 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_char_code_textview"
         android:layout_alignParentLeft="true"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_nominal_textview"
@@ -57,7 +57,7 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_char_code_textview"
         android:layout_toEndOf = "@+id/valute_nominal_label_textview"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/background_dark"
         android:textSize="28sp" />
 
     <TextView
@@ -68,9 +68,8 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_nominal_textview"
         android:layout_alignParentLeft="true"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_value_textview"
@@ -80,8 +79,9 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_nominal_textview"
         android:layout_toEndOf = "@+id/valute_value_label_textview"
-        android:textColor="@android:color/white"
-        android:textSize="28sp" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/valute_prev_value_label_textview"
@@ -91,9 +91,8 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_value_textview"
         android:layout_alignParentLeft="true"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_prev_value_textview"
@@ -103,7 +102,7 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_value_textview"
         android:layout_toEndOf = "@+id/valute_value_label_textview"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/background_dark"
         android:textSize="28sp" />
 
     <TextView
@@ -114,9 +113,8 @@
         android:layout_margin="5dp"
         android:layout_alignParentLeft="true"
         android:layout_below ="@+id/valute_prev_value_label_textview"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp"/>
 
 
     <TextView
@@ -127,10 +125,8 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_prev_value_textview"
         android:layout_toEndOf = "@+id/valute_id_label_textview"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/background_dark"
         android:textSize="28sp" />
-
-
 
     <TextView
         android:id="@+id/valute_num_code_label_textview"
@@ -140,9 +136,8 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_prev_value_textview"
         android:layout_toEndOf = "@+id/valute_id_textview"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/valute_num_code_textview"
@@ -152,23 +147,9 @@
         android:layout_margin="5dp"
         android:layout_below ="@+id/valute_prev_value_textview"
         android:layout_toEndOf = "@+id/valute_num_code_label_textview"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/background_dark"
         android:textSize="28sp" />
 
 </RelativeLayout>
 
-    <!--
-    <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name: "
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
-    </LinearLayout>-->
