@@ -66,67 +66,27 @@ class MainActivity : AppCompatActivity() {
         Log.d("Tag", "getValues sumRub.isNullOrEmpty(): ${!sumRub.isNullOrEmpty()}")
         Log.d("Tag", "getValues umRub.isDigitsOnly(): ${sumRub.isDigitsOnly()}")
 
-//        if (sumRub.isNotBlank() && sumRub.isNullOrEmpty() && sumRub.isDigitsOnly()) {
         if (sumRub.isNotBlank() && !sumRub.isNullOrEmpty() && spinner.selectedItem != null && !valuteList.isNullOrEmpty()) {
-            try {
                 Log.d("Tag", "getValues 1: ${sumRub}")
-
-                var res = sumRub.toString()
-                    .toFloat() * (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Nominal
-                    ?: 0f).toFloat() / (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Value
-                    ?: 0f)
+                var res = sumRub.toString().toFloat() *
+                        (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Nominal ?: 0f).toFloat() /
+                        (valuteList.find { it.Name == spinner.selectedItem.toString() }?.Value ?: 0f)
                 Log.d("Tag", "getValues res: ${res}")
-//                String.format("%.3f", number)
-//                findViewById<TextView>(R.id.convert_result_textview).text = res.toString()
-                findViewById<TextView>(R.id.convert_result_textview).text = String.format(
-                    "%.4f",
-                    res
-                )
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.d("Tag", "getValues err: ${sumRub}")
+                findViewById<TextView>(R.id.convert_result_textview).text = String.format("%.4f", res)
 
-                Toast.makeText(
-                    this, "Введена не корректная сумма в рублях", Toast.LENGTH_LONG
-//                    this, "Spinner 1 " + spinner.selectedItem.toString(), Toast.LENGTH_LONG
-                ).show()
-            }
         }
-//        findViewById<TextView>(R.id.convert_choice_textview).text = "Выбрана валюта: 2" +
-//                valuteList.find { it.CharCode.equals(spinner.selectedItem.toString()) }
     }
 
     private fun clearTable() {
-        //открываем подключение к базе данных
-//        database = databaseHelper?.readableDatabase
-
-        //получаем данных в Cursor при помощи SQL запроса
-//        userCursor = database?.rawQuery("SELECT * FROM ${DatabaseHelper.TABLE}", null)
-
-//        valuteArray.clear()
         Log.d("Tag", "clear valuteArray: ${valuteList}")
-
         databaseHelper?.deleteDB()
         valuteList.clear()
         initRecycler()
-
-//        adapter.notifyDataSetChanged()
-//        notifyRV()
-//        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-//        recyclerView.adapter?.notifyDataSetChanged()
-    }
-
-
-    fun getCurrentDate(): String? {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-        dateFormat.timeZone = TimeZone.getDefault()
-        val today = Calendar.getInstance().time
-        return dateFormat.format(today)
     }
 
     private fun initRecycler() {
         valuteList.clear()
-        valuteList.addAll(databaseHelper?.getAllFromDB()!!)
+        databaseHelper?.getAllFromDB()?.let { valuteList.addAll(it) }
         adapter = ValutaRecyclerAdapter(this, valuteList)
 
         findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter

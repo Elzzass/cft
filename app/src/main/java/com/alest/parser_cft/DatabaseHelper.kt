@@ -15,7 +15,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         onCreate(db)
     }
 
-    fun getAllFromDB(): ArrayList<Valute>? {
+    fun getAllFromDB(): ArrayList<Valute> {
         val arrayList: ArrayList<Valute> = ArrayList()
         val selectAllQuery = "SELECT *FROM $TABLE"
         val db: SQLiteDatabase = this.getWritableDatabase()
