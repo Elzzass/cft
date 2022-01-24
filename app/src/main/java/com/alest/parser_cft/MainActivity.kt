@@ -16,12 +16,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-
     val URL = "https://www.cbr-xml-daily.ru/daily_json.js"
-    var People = ArrayList<ResponseData>()
-    private lateinit var textView: TextView
     private lateinit var dateTextView: TextView
-    var str: String = ""
     var valuteList: MutableList<Valute> = ArrayList()
     var databaseHelper: DatabaseHelper? = null
     lateinit var adapter: RecyclerView.Adapter<*>
@@ -31,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val preferences: SharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        textView = findViewById(R.id.okhttp_response_textview)
         dateTextView= findViewById(R.id.date_textview)
 
         databaseHelper = DatabaseHelper(applicationContext)
@@ -44,9 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.http_request_button).setOnClickListener {
             request()
-        }
-        findViewById<Button>(R.id.delete_db).setOnClickListener {
-            clearTable()
         }
     }
 
@@ -122,7 +114,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 initRecycler()
                 initSpinner()
-                textView.post { textView.text = dataFromResponse.toString() }
                 dateTextView.post { dateTextView.text = "Дата: " + dataFromResponse?.Date }
             } else {
                 Toast.makeText(applicationContext, "Нет данных. Ошибка в сети!!!", Toast.LENGTH_SHORT).show()

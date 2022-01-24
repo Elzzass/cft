@@ -40,20 +40,6 @@
         tools:listitem="@layout/cell" />
 
     <TextView
-        android:id="@+id/okhttp_response_textview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="RESPONSE TEXT"
-        android:layout_weight="10"
-        android:textSize="20sp" />
-
-
-    <Button
-        android:id="@+id/delete_db"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Очистить" />
-    <TextView
         android:id="@+id/convert_promt_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
