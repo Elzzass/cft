@@ -11,18 +11,15 @@ class ValutaRecyclerAdapter(context: Context, private val valutaList: List<Valut
     : RecyclerView.Adapter<ValutaRecyclerAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
 
-    //Создаем элемент списка который отображается на экране
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = inflater.inflate(R.layout.cell, parent, false)
         return ViewHolder(view)
     }
 
-    //Задаем значения для элемента списка
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(valutaList[position])
     }
 
-    //Получаем количество элементов в списке
     override fun getItemCount(): Int {
         return valutaList.size
     }
@@ -36,7 +33,6 @@ class ValutaRecyclerAdapter(context: Context, private val valutaList: List<Valut
         val idView: TextView = view.findViewById(R.id.valute_id_textview)
         val nominalView: TextView = view.findViewById(R.id.valute_nominal_textview)
 
-        //        fun bind(car: Car) {
         fun bind(valute: Valute) {
             nameView.text = valute.Name
             charCodeView.text = valute.CharCode

@@ -56,7 +56,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-
     companion object {
         private const val DATABASE_NAME = "valuta.db"
         private const val SCHEMA = 1
@@ -66,7 +65,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         const val COLUMN_NUMCODE = "numcode"
         const val COLUMN_CHARCODE = "charcode"
         const val COLUMN_NOMINAL = "nominal"
-        const val COLUMN_NAME = "name" 
+        const val COLUMN_NAME = "name"
         const val COLUMN_VALUE = "value"
         const val COLUMN_PREVIOUS = "previous"
     }
