@@ -19,7 +19,7 @@
         android:id="@+id/date_textview"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:text="Дата обновления: "
+        android:text="@string/data_message"
         android:layout_weight="85"
         android:textSize="20sp" />
         <Button
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="↺"/>
+            android:text="@string/button_request_text"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -43,7 +43,7 @@
         android:id="@+id/convert_promt_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Конвертировать указанную сумму в рублях "
+        android:text="@string/convert_label"
         android:textSize="20sp" />
     <Spinner
         android:id="@+id/spinner"
@@ -64,17 +64,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="28sp"
-            android:hint="Введите сумму в рублях"
+            android:hint="@string/edit_text_hint"
             android:layout_weight="30"
             android:inputType="numberDecimal">
-
         </EditText>
 
         <TextView
             android:id="@+id/convert_result_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="0.0000"
+            android:text="@string/init_sum_result"
             android:layout_weight="40"
             android:textSize="28sp" />
         <Button
@@ -84,35 +83,6 @@
             android:onClick="getValues"
             android:layout_weight="30"
             android:textSize="12sp"
-            android:text="Конвертировать" />
+            android:text="@string/convert_button_text" />
     </LinearLayout>
 </LinearLayout>
-
-<!--
-
-<RelativeLayout
-android:id="@+id/relativeLayoutforPRICE"
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
-
-<TextView
-    android:id="@+id/textView_points_to_win"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Points to win"
-    android:layout_alignParentLeft="true"
-    android:textAppearance="?android:attr/textAppearanceLarge" />
-<Spinner
-    android:id="@+id/spinner2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/spinner3"
-    android:layout_margin="10dp"
-    android:entries="@array/city_list" />
-<Spinner
-    android:id="@+id/spinner3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"/>
-
-</RelativeLayout>-->

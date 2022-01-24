@@ -16,7 +16,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    val URL = "https://www.cbr-xml-daily.ru/daily_json.js"
+    private val URL = "https://www.cbr-xml-daily.ru/daily_json.js"
     private lateinit var dateTextView: TextView
     var valuteList: MutableList<Valute> = ArrayList()
     var databaseHelper: DatabaseHelper? = null
@@ -120,12 +120,5 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //закрываем подключение к БД и курсору
-//        database?.close()
-//        userCursor?.close()
     }
 }

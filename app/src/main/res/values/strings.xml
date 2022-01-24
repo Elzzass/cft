@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">parser_cft</string>
+    <string name="data_message">Дата обновления:</string>
+    <string name="button_request_text">↺</string>
+    <string name="convert_label">Конвертировать указанную сумму в рублях</string>
+    <string name="edit_text_hint">Введите сумму в рублях</string>
+    <string name="init_sum_result">0.0000</string>
+    <string name="convert_button_text">Конвертировать</string>
 
     <string-array name="city_list">
         <item>Bangkok</item>
